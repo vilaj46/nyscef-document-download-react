@@ -1,25 +1,31 @@
 {
+  "manifest_version": 2,
   "short_name": "React App",
   "name": "Create React App Sample",
-  "icons": [
+  "version": "1",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "background": {
+    "scripts": ["./scripts/background/background.js"]
+  },
+  "content_scripts": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "matches": ["*://*.iapps.courts.state.ny.us/nyscef/DocumentList*"],
+      "js": [
+        "./scripts/content/content.js",
+        "./scripts/content/Button.js",
+        "./scripts/content/contentActions.js",
+        "./scripts/content/contentUtils.js",
+        "./scripts/content/storage.js"
+      ]
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "48.png"
+  },
+  "permissions": ["activeTab"]
 }
